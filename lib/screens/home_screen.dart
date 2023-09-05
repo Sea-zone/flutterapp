@@ -16,6 +16,45 @@ class _HomeScreenState extends State<HomeScreen> {
     {"id": 2, "image_path": 'images/2.png'},
     {"id": 3, "image_path": 'images/3.png'},
   ];
+  List<Widget> imageTexts = [
+    Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'REACH YOUR GOALS',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 32.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          'FASTER',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 32.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    ),
+    Text(
+      'Text for Image 2',
+      style: TextStyle(
+        color: Colors.white,
+        fontSize: 32.0,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+    Text(
+      'Text for Image 3',
+      style: TextStyle(
+        color: Colors.white,
+        fontSize: 32.0,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+  ];
   final CarouselController carouselController = CarouselController();
   int currentIndex = 0;
 
@@ -98,32 +137,27 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Column(children: [
         Stack(
           children: [
-            InkWell(
-              onTap: () {
-                print(currentIndex);
-              },
-              child: CarouselSlider(
-                items: imagelist
-                    .map(
-                      (item) => Image.asset(
-                        item['image_path'],
-                        fit: BoxFit.cover,
-                        width: 500,
-                      ),
-                    )
-                    .toList(),
-                carouselController: carouselController,
-                options: CarouselOptions(
-                  scrollPhysics: const BouncingScrollPhysics(),
-                  autoPlay: true,
-                  aspectRatio: 0.8,
-                  viewportFraction: 1,
-                  onPageChanged: (index, reason) {
-                    setState(() {
-                      currentIndex = index;
-                    });
-                  },
-                ),
+            CarouselSlider(
+              items: imagelist
+                  .map(
+                    (item) => Image.asset(
+                      item['image_path'],
+                      fit: BoxFit.cover,
+                      width: 500,
+                    ),
+                  )
+                  .toList(),
+              carouselController: carouselController,
+              options: CarouselOptions(
+                scrollPhysics: const BouncingScrollPhysics(),
+                autoPlay: true,
+                aspectRatio: 0.8,
+                viewportFraction: 1,
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    currentIndex = index;
+                  });
+                },
               ),
             ),
             Positioned(
@@ -149,6 +183,38 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   );
                 }).toList(),
+              ),
+            ),
+            Positioned(
+              bottom: 400,
+              left: 30,
+              right: 20,
+              child: InkWell(
+                onTap: () {
+                  print(currentIndex);
+                },
+                child: Container(
+                  padding: EdgeInsets.all(16.0),
+                  color: Colors.black.withOpacity(0.7),
+                  child: imageTexts[
+                      currentIndex], // Display text based on currentIndex
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 400,
+              left: 30,
+              right: 20,
+              child: InkWell(
+                onTap: () {
+                  print(currentIndex);
+                },
+                child: Container(
+                  padding: EdgeInsets.all(16.0),
+                  color: Colors.black.withOpacity(0.7),
+                  child: imageTexts[
+                      currentIndex], // Display text based on currentIndex
+                ),
               ),
             ),
           ],
