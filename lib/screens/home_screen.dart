@@ -104,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
   //     ),
   //   ),
   // ];
-
+  final _formKey = GlobalKey<FormState>();
   final CarouselController carouselController = CarouselController();
   int currentIndex = 0;
 
@@ -313,6 +313,24 @@ class _HomeScreenState extends State<HomeScreen> {
                   text:
                       'Worldwide we help businesses gain more leads and brands awareness by reassessing and improving their online presence. We provide unique web design combined with an extensive Search engine optimization, online advertising, and content strategy to ensure business growth.',
                 ),
+              ),
+            ),
+            Container(
+              child: Form(
+                key: _formKey,
+                // color: Colors.black;
+                child: Column(children: [
+                  TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'FullName *',
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Enter your Name';
+                      }
+                    },
+                  ),
+                ]),
               ),
             ),
           ],
