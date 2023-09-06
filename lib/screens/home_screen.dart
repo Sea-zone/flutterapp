@@ -16,45 +16,95 @@ class _HomeScreenState extends State<HomeScreen> {
     {"id": 2, "image_path": 'images/2.png'},
     {"id": 3, "image_path": 'images/3.png'},
   ];
-  List<Widget> imageTexts = [
-    Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'REACH YOUR GOALS',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 32.0,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        Text(
-          'FASTER',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 32.0,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ],
-    ),
-    Text(
-      'Text for Image 2',
-      style: TextStyle(
-        color: Colors.white,
-        fontSize: 32.0,
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-    Text(
-      'Text for Image 3',
-      style: TextStyle(
-        color: Colors.white,
-        fontSize: 32.0,
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-  ];
+  // List<Widget> imageTexts = [
+  //   // Image 1
+  //   Positioned(
+  //     top: 300, // Adjust the top position for the first Text widget
+  //     left: 20, // Adjust the left position for the first Text widget
+  //     child: Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         Text(
+  //           'REACH YOUR GOALS',
+  //           style: TextStyle(
+  //             color: Colors.white,
+  //             fontSize: 32.0,
+  //             fontWeight: FontWeight.bold,
+  //           ),
+  //         ),
+  //         Text(
+  //           'We provide business and brands',
+  //           style: TextStyle(
+  //             color: Colors.white,
+  //             fontSize: 32.0,
+  //             fontWeight: FontWeight.bold,
+  //           ),
+  //         ),
+  //         Text(
+  //           'Another line of text',
+  //           style: TextStyle(
+  //             color: Colors.white,
+  //             fontSize: 24.0,
+  //             fontWeight: FontWeight.normal,
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   ),
+  //   Positioned(
+  //     top: 70, // Adjust the top position for the second Text widget
+  //     left: 20, // Adjust the left position for the second Text widget
+  //     child: Text(
+  //       'We provide business and brands',
+  //       style: TextStyle(
+  //         color: Colors.white,
+  //         fontSize: 32.0,
+  //         fontWeight: FontWeight.bold,
+  //       ),
+  //     ),
+  //   ),
+  //   Positioned(
+  //     top: 120, // Adjust the top position for the third Text widget
+  //     left: 20, // Adjust the left position for the third Text widget
+  //     child: Text(
+  //       'Another line of text',
+  //       style: TextStyle(
+  //         color: Colors.white,
+  //         fontSize: 24.0, // Adjust font size as needed
+  //         fontWeight: FontWeight.normal, // Adjust font weight as needed
+  //       ),
+  //     ),
+  //   ),
+
+  //   // Image 2
+  //   Positioned(
+  //     top: 220, // Adjust the top position as needed
+  //     left: 20, // Adjust the left position as needed
+  //     child: Text(
+  //       'Text for Image 2',
+  //       style: TextStyle(
+  //         color: Colors.white,
+  //         fontSize: 32.0,
+  //         fontWeight: FontWeight.bold,
+  //       ),
+  //     ),
+  //   ),
+
+  //   // Image 3
+  //   Positioned(
+  //     top: 300, // Adjust the top position as needed
+  //     left: 20, // Adjust the left position as needed
+  //     child: Text(
+  //       'Text for Image 3',
+  //       style: TextStyle(
+  //         color: Colors.white,
+  //         fontSize: 32.0,
+  //         fontWeight: FontWeight.bold,
+  //       ),
+  //     ),
+  //   ),
+  // ];
+
   final CarouselController carouselController = CarouselController();
   int currentIndex = 0;
 
@@ -187,36 +237,27 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Positioned(
               bottom: 400,
-              left: 30,
-              right: 20,
-              child: InkWell(
-                onTap: () {
-                  print(currentIndex);
-                },
-                child: Container(
-                  padding: EdgeInsets.all(16.0),
-                  color: Colors.black.withOpacity(0.7),
-                  child: imageTexts[
-                      currentIndex], // Display text based on currentIndex
+              right: 10,
+              left: 50,
+              child: Container(
+                width: 400,
+                // color: Colors.black54,
+                padding: const EdgeInsets.all(10),
+                child: const Text(
+                  'REACH YOUR GOALS',
+                  style: TextStyle(fontSize: 32, color: Colors.white),
                 ),
               ),
             ),
             Positioned(
-              bottom: 400,
-              left: 30,
-              right: 20,
-              child: InkWell(
-                onTap: () {
-                  print(currentIndex);
-                },
+                bottom: 300,
+                right: 10,
+                left: 50,
                 child: Container(
-                  padding: EdgeInsets.all(16.0),
-                  color: Colors.black.withOpacity(0.7),
-                  child: imageTexts[
-                      currentIndex], // Display text based on currentIndex
-                ),
-              ),
-            ),
+                  width: 400,
+                  color: Colors.black54,
+                  padding: const EdgeInsets.all(10),
+                ))
           ],
         ),
       ]),
