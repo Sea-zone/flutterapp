@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:carousel_slider/carousel_controller.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,10 +11,30 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List imagelist = [
-    {"id": 1, "image_path": 'images/1.png'},
-    {"id": 2, "image_path": 'images/2.png'},
-    {"id": 3, "image_path": 'images/3.png'},
+    {
+      "quote": "Reach your goal\n faster",
+      "description":
+          "Forge connections, engage deeply,and brands\n digital marketing services",
+      "id": 1,
+      "image_path": 'images/1.png',
+      "bottonText": "request Quote1"
+    },
+    {
+      "quote": "Connect, Engage ,\n succeed",
+      "description": "this is description 2",
+      "id": 2,
+      "image_path": 'images/2.png',
+      "bottonText": "request Quote2"
+    },
+    {
+      "quote": "Elevate Customer \n Experience",
+      "description": "this is description 3",
+      "id": 3,
+      "image_path": 'images/3.png',
+      "bottonText": "request Quote3"
+    },
   ];
+<<<<<<< HEAD
   // List<Widget> imageTexts = [
   //   // Image 1
   //   Positioned(
@@ -105,6 +124,9 @@ class _HomeScreenState extends State<HomeScreen> {
   //   ),
   // ];
   final _formKey = GlobalKey<FormState>();
+=======
+
+>>>>>>> development
   final CarouselController carouselController = CarouselController();
   int currentIndex = 0;
 
@@ -113,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       endDrawer: Drawer(
         child: Padding(
-          padding: EdgeInsets.only(top: 50),
+          padding: const EdgeInsets.only(top: 50),
           child: ListView(
             padding: EdgeInsets.zero,
             children: [
@@ -175,7 +197,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       appBar: AppBar(
         toolbarHeight: 75,
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
         title: Row(children: [
           Image.asset(
             "images/logo.png",
@@ -189,28 +211,58 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Stack(
               children: [
+                // CarouselSlider(
+                //   items: imagelist
+                //       .map(
+                //         (item) => Image.asset(
+                //           item['image_path'],
+                //           fit: BoxFit.cover,
+                //           width: 500,
+                //         ),
+                //       )
+                //       .toList(),
+                //   carouselController: carouselController,
+                //   options: CarouselOptions(
+                //     scrollPhysics: const BouncingScrollPhysics(),
+                //     autoPlay: true,
+                //     aspectRatio: 0.8,
+                //     viewportFraction: 1,
+                //     onPageChanged: (index, reason) {
+                //       setState(() {
+                //         currentIndex = index;
+                //       });
+                //     },
+                //   ),
+                // ),
+
                 CarouselSlider(
-                  items: imagelist
-                      .map(
-                        (item) => Image.asset(
-                          item['image_path'],
-                          fit: BoxFit.cover,
-                          width: 500,
-                        ),
-                      )
-                      .toList(),
-                  carouselController: carouselController,
-                  options: CarouselOptions(
-                    scrollPhysics: const BouncingScrollPhysics(),
-                    autoPlay: true,
-                    aspectRatio: 0.8,
-                    viewportFraction: 1,
-                    onPageChanged: (index, reason) {
-                      setState(() {
-                        currentIndex = index;
-                      });
-                    },
-                  ),
+                  options: CarouselOptions(height: 400.0),
+                  items: imagelist.map((index) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return CaroselSliderContents(
+                          buttonText: index["bottonText"],
+                          description: index["description"],
+                          imagePath: index["image_path"],
+                          onClick: () {
+                            if (kDebugMode) {
+                              print("clicked $index");
+                            }
+                          },
+                          quote: index["quote"],
+                        );
+
+                        //   Container(
+                        //     width: MediaQuery.of(context).size.width,
+                        //     margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                        //     decoration: const BoxDecoration(
+                        //         color: Colors.amber
+                        //     ),
+                        //     child: Text('text $i', style: TextStyle(fontSize: 16.0),)
+                        // );
+                      },
+                    );
+                  }).toList(),
                 ),
                 Positioned(
                   bottom: 10,
@@ -229,43 +281,20 @@ class _HomeScreenState extends State<HomeScreen> {
                             horizontal: 3.0,
                           ),
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: currentIndex == entry.key
-                                  ? Colors.white
-                                  : Colors.grey),
+                            borderRadius: BorderRadius.circular(10),
+                            color: currentIndex == entry.key
+                                ? Colors.white
+                                : Colors.grey,
+                          ),
                         ),
                       );
                     }).toList(),
                   ),
                 ),
-                Positioned(
-                  bottom: 400,
-                  right: 10,
-                  left: 50,
-                  child: Container(
-                    width: 400,
-                    // color: Colors.black54,
-                    padding: const EdgeInsets.all(10),
-                    child: const Text(
-                      'REACH YOUR GOALS',
-                      style: TextStyle(fontSize: 32, color: Colors.white),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  bottom: 300,
-                  right: 10,
-                  left: 50,
-                  child: Container(
-                    width: 400,
-                    color: Colors.black54,
-                    padding: const EdgeInsets.all(10),
-                  ),
-                ),
               ],
             ),
             Container(
-              margin: EdgeInsets.only(top: 30.0),
+              margin: const EdgeInsets.only(top: 30.0),
               child: Image.asset(
                 'images/seo.png',
                 fit: BoxFit.cover,
@@ -275,13 +304,15 @@ class _HomeScreenState extends State<HomeScreen> {
             Stack(
               children: [
                 Container(
-                  margin: EdgeInsets.only(
-                      top: 25.0, right: 370), // Adjust left margin as needed
+                  margin: const EdgeInsets.only(
+                    top: 25.0,
+                    right: 370,
+                  ), // Adjust left margin as needed
                   height: 30.0,
                   width: 10,
                   color: Colors.red,
                 ),
-                Positioned(
+                const Positioned(
                   left: 20.0, // Adjust the left position as needed
                   top: 30.0, // Adjust the top position as needed
                   child: Text(
@@ -296,14 +327,14 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             Container(
-              margin: EdgeInsets.only(top: 30),
+              margin: const EdgeInsets.only(top: 30),
               child: TextField(
                 maxLines: null,
                 readOnly: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: InputBorder.none, // Remove the border
                 ),
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
@@ -336,6 +367,68 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class CaroselSliderContents extends StatelessWidget {
+  const CaroselSliderContents({
+    required this.buttonText,
+    required this.description,
+    required this.imagePath,
+    required this.onClick,
+    required this.quote,
+    super.key,
+  });
+
+  final String imagePath;
+  final String quote;
+  final String buttonText;
+  final String description;
+  final Function() onClick;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Image(
+          width: double.infinity,
+          height: 400.0,
+          fit: BoxFit.cover,
+          image: AssetImage(
+            imagePath,
+          ),
+        ),
+        Positioned(
+            child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                quote,
+                style: const TextStyle(
+                  color: Colors.yellow,
+                ),
+              ),
+              const SizedBox(
+                height: 30.0,
+              ),
+              Text(
+                description,
+                style: const TextStyle(
+                  color: Colors.yellow,
+                ),
+              ),
+              ElevatedButton(
+                  onPressed: onClick,
+                  child: Text(
+                    buttonText,
+                    style: const TextStyle(color: Colors.black),
+                  ))
+            ],
+          ),
+        ))
+      ],
     );
   }
 }
