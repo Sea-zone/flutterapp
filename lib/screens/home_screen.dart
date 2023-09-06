@@ -13,7 +13,8 @@ class _HomeScreenState extends State<HomeScreen> {
   List imagelist = [
     {
       "quote": "Reach your goal\n faster",
-      "description": "this is description 1",
+      "description":
+          "Forge connections, engage deeply,and brands\n digital marketing services",
       "id": 1,
       "image_path": 'images/1.png',
       "bottonText": "request Quote1"
@@ -33,95 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
       "bottonText": "request Quote3"
     },
   ];
-
-  // List<Widget> imageTexts = [
-  //   // Image 1
-  //   Positioned(
-  //     top: 300, // Adjust the top position for the first Text widget
-  //     left: 20, // Adjust the left position for the first Text widget
-  //     child: Column(
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       children: [
-  //         Text(
-  //           'REACH YOUR GOALS',
-  //           style: TextStyle(
-  //             color: Colors.white,
-  //             fontSize: 32.0,
-  //             fontWeight: FontWeight.bold,
-  //           ),
-  //         ),
-  //         Text(
-  //           'We provide business and brands',
-  //           style: TextStyle(
-  //             color: Colors.white,
-  //             fontSize: 32.0,
-  //             fontWeight: FontWeight.bold,
-  //           ),
-  //         ),
-  //         Text(
-  //           'Another line of text',
-  //           style: TextStyle(
-  //             color: Colors.white,
-  //             fontSize: 24.0,
-  //             fontWeight: FontWeight.normal,
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   ),
-  //   Positioned(
-  //     top: 70, // Adjust the top position for the second Text widget
-  //     left: 20, // Adjust the left position for the second Text widget
-  //     child: Text(
-  //       'We provide business and brands',
-  //       style: TextStyle(
-  //         color: Colors.white,
-  //         fontSize: 32.0,
-  //         fontWeight: FontWeight.bold,
-  //       ),
-  //     ),
-  //   ),
-  //   Positioned(
-  //     top: 120, // Adjust the top position for the third Text widget
-  //     left: 20, // Adjust the left position for the third Text widget
-  //     child: Text(
-  //       'Another line of text',
-  //       style: TextStyle(
-  //         color: Colors.white,
-  //         fontSize: 24.0, // Adjust font size as needed
-  //         fontWeight: FontWeight.normal, // Adjust font weight as needed
-  //       ),
-  //     ),
-  //   ),
-
-  //   // Image 2
-  //   Positioned(
-  //     top: 220, // Adjust the top position as needed
-  //     left: 20, // Adjust the left position as needed
-  //     child: Text(
-  //       'Text for Image 2',
-  //       style: TextStyle(
-  //         color: Colors.white,
-  //         fontSize: 32.0,
-  //         fontWeight: FontWeight.bold,
-  //       ),
-  //     ),
-  //   ),
-
-  //   // Image 3
-  //   Positioned(
-  //     top: 300, // Adjust the top position as needed
-  //     left: 20, // Adjust the left position as needed
-  //     child: Text(
-  //       'Text for Image 3',
-  //       style: TextStyle(
-  //         color: Colors.white,
-  //         fontSize: 32.0,
-  //         fontWeight: FontWeight.bold,
-  //       ),
-  //     ),
-  //   ),
-  // ];
 
   final CarouselController carouselController = CarouselController();
   int currentIndex = 0;
