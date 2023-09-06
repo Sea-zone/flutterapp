@@ -184,93 +184,139 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ]),
       ),
-      body: Column(
-        children: [
-          Stack(
-            children: [
-              CarouselSlider(
-                items: imagelist
-                    .map(
-                      (item) => Image.asset(
-                        item['image_path'],
-                        fit: BoxFit.cover,
-                        width: 500,
-                      ),
-                    )
-                    .toList(),
-                carouselController: carouselController,
-                options: CarouselOptions(
-                  scrollPhysics: const BouncingScrollPhysics(),
-                  autoPlay: true,
-                  aspectRatio: 0.8,
-                  viewportFraction: 1,
-                  onPageChanged: (index, reason) {
-                    setState(() {
-                      currentIndex = index;
-                    });
-                  },
-                ),
-              ),
-              Positioned(
-                bottom: 10,
-                left: 0,
-                right: 0,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: imagelist.asMap().entries.map((entry) {
-                    return GestureDetector(
-                      onTap: () => carouselController.animateToPage(entry.key),
-                      child: Container(
-                        width: currentIndex == entry.key ? 17 : 7,
-                        height: 7.0,
-                        margin: const EdgeInsets.symmetric(
-                          horizontal: 3.0,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Stack(
+              children: [
+                CarouselSlider(
+                  items: imagelist
+                      .map(
+                        (item) => Image.asset(
+                          item['image_path'],
+                          fit: BoxFit.cover,
+                          width: 500,
                         ),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: currentIndex == entry.key
-                                ? Colors.white
-                                : Colors.grey),
-                      ),
-                    );
-                  }).toList(),
-                ),
-              ),
-              Positioned(
-                bottom: 400,
-                right: 10,
-                left: 50,
-                child: Container(
-                  width: 400,
-                  // color: Colors.black54,
-                  padding: const EdgeInsets.all(10),
-                  child: const Text(
-                    'REACH YOUR GOALS',
-                    style: TextStyle(fontSize: 32, color: Colors.white),
+                      )
+                      .toList(),
+                  carouselController: carouselController,
+                  options: CarouselOptions(
+                    scrollPhysics: const BouncingScrollPhysics(),
+                    autoPlay: true,
+                    aspectRatio: 0.8,
+                    viewportFraction: 1,
+                    onPageChanged: (index, reason) {
+                      setState(() {
+                        currentIndex = index;
+                      });
+                    },
                   ),
                 ),
+                Positioned(
+                  bottom: 10,
+                  left: 0,
+                  right: 0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: imagelist.asMap().entries.map((entry) {
+                      return GestureDetector(
+                        onTap: () =>
+                            carouselController.animateToPage(entry.key),
+                        child: Container(
+                          width: currentIndex == entry.key ? 17 : 7,
+                          height: 7.0,
+                          margin: const EdgeInsets.symmetric(
+                            horizontal: 3.0,
+                          ),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: currentIndex == entry.key
+                                  ? Colors.white
+                                  : Colors.grey),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+                Positioned(
+                  bottom: 400,
+                  right: 10,
+                  left: 50,
+                  child: Container(
+                    width: 400,
+                    // color: Colors.black54,
+                    padding: const EdgeInsets.all(10),
+                    child: const Text(
+                      'REACH YOUR GOALS',
+                      style: TextStyle(fontSize: 32, color: Colors.white),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: 300,
+                  right: 10,
+                  left: 50,
+                  child: Container(
+                    width: 400,
+                    color: Colors.black54,
+                    padding: const EdgeInsets.all(10),
+                  ),
+                ),
+              ],
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 30.0),
+              child: Image.asset(
+                'images/seo.png',
+                fit: BoxFit.cover,
+                width: 200,
               ),
-              Positioned(
-                bottom: 300,
-                right: 10,
-                left: 50,
-                child: Container(
-                  width: 400,
-                  color: Colors.black54,
-                  padding: const EdgeInsets.all(10),
+            ),
+            Stack(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(
+                      top: 25.0, right: 370), // Adjust left margin as needed
+                  height: 30.0,
+                  width: 10,
+                  color: Colors.red,
+                ),
+                Positioned(
+                  left: 20.0, // Adjust the left position as needed
+                  top: 30.0, // Adjust the top position as needed
+                  child: Text(
+                    'MARKETING FOR EVERY ONE',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 30),
+              child: TextField(
+                maxLines: null,
+                readOnly: true,
+                decoration: InputDecoration(
+                  border: InputBorder.none, // Remove the border
+                ),
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+                textAlign: TextAlign.justify,
+                controller: TextEditingController(
+                  text:
+                      'Worldwide we help businesses gain more leads and brands awareness by reassessing and improving their online presence. We provide unique web design combined with an extensive Search engine optimization, online advertising, and content strategy to ensure business growth.',
                 ),
               ),
-            ],
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 30.0),
-            child: Image.asset(
-              'images/seo.png',
-              fit: BoxFit.cover,
-              width: 280,
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
