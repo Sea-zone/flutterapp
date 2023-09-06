@@ -17,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
           "Forge connections, engage deeply,and brands\n digital marketing services",
       "id": 1,
       "image_path": 'images/1.png',
-      "bottonText": "request Quote1"
+      "bottonText": "request Quote"
     },
     {
       "quote": "Connect, Engage ,\n succeed",
@@ -34,7 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
       "bottonText": "request Quote3"
     },
   ];
-<<<<<<< HEAD
   // List<Widget> imageTexts = [
   //   // Image 1
   //   Positioned(
@@ -124,9 +123,6 @@ class _HomeScreenState extends State<HomeScreen> {
   //   ),
   // ];
   final _formKey = GlobalKey<FormState>();
-=======
-
->>>>>>> development
   final CarouselController carouselController = CarouselController();
   int currentIndex = 0;
 
