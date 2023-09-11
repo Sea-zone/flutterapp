@@ -24,105 +24,17 @@ class _HomeScreenState extends State<HomeScreen> {
       "description": "this is description 2",
       "id": 2,
       "image_path": 'images/2.png',
-      "bottonText": "request Quote2"
+      "bottonText": "request Quote"
     },
     {
       "quote": "Elevate Customer \n Experience",
       "description": "this is description 3",
       "id": 3,
       "image_path": 'images/3.png',
-      "bottonText": "request Quote3"
+      "bottonText": "request Quote"
     },
   ];
-  // List<Widget> imageTexts = [
-  //   // Image 1
-  //   Positioned(
-  //     top: 300, // Adjust the top position for the first Text widget
-  //     left: 20, // Adjust the left position for the first Text widget
-  //     child: Column(
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       children: [
-  //         Text(
-  //           'REACH YOUR GOALS',
-  //           style: TextStyle(
-  //             color: Colors.white,
-  //             fontSize: 32.0,
-  //             fontWeight: FontWeight.bold,
-  //           ),
-  //         ),
-  //         Text(
-  //           'We provide business and brands',
-  //           style: TextStyle(
-  //             color: Colors.white,
-  //             fontSize: 32.0,
-  //             fontWeight: FontWeight.bold,
-  //           ),
-  //         ),
-  //         Text(
-  //           'Another line of text',
-  //           style: TextStyle(
-  //             color: Colors.white,
-  //             fontSize: 24.0,
-  //             fontWeight: FontWeight.normal,
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   ),
-  //   Positioned(
-  //     top: 70, // Adjust the top position for the second Text widget
-  //     left: 20, // Adjust the left position for the second Text widget
-  //     child: Text(
-  //       'We provide business and brands',
-  //       style: TextStyle(
-  //         color: Colors.white,
-  //         fontSize: 32.0,
-  //         fontWeight: FontWeight.bold,
-  //       ),
-  //     ),
-  //   ),
-  //   Positioned(
-  //     top: 120, // Adjust the top position for the third Text widget
-  //     left: 20, // Adjust the left position for the third Text widget
-  //     child: Text(
-  //       'Another line of text',
-  //       style: TextStyle(
-  //         color: Colors.white,
-  //         fontSize: 24.0, // Adjust font size as needed
-  //         fontWeight: FontWeight.normal, // Adjust font weight as needed
-  //       ),
-  //     ),
-  //   ),
 
-  //   // Image 2
-  //   Positioned(
-  //     top: 220, // Adjust the top position as needed
-  //     left: 20, // Adjust the left position as needed
-  //     child: Text(
-  //       'Text for Image 2',
-  //       style: TextStyle(
-  //         color: Colors.white,
-  //         fontSize: 32.0,
-  //         fontWeight: FontWeight.bold,
-  //       ),
-  //     ),
-  //   ),
-
-  //   // Image 3
-  //   Positioned(
-  //     top: 300, // Adjust the top position as needed
-  //     left: 20, // Adjust the left position as needed
-  //     child: Text(
-  //       'Text for Image 3',
-  //       style: TextStyle(
-  //         color: Colors.white,
-  //         fontSize: 32.0,
-  //         fontWeight: FontWeight.bold,
-  //       ),
-  //     ),
-  //   ),
-  // ];
-  final _formKey = GlobalKey<FormState>();
   final CarouselController carouselController = CarouselController();
   int currentIndex = 0;
 
@@ -207,30 +119,6 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Stack(
               children: [
-                // CarouselSlider(
-                //   items: imagelist
-                //       .map(
-                //         (item) => Image.asset(
-                //           item['image_path'],
-                //           fit: BoxFit.cover,
-                //           width: 500,
-                //         ),
-                //       )
-                //       .toList(),
-                //   carouselController: carouselController,
-                //   options: CarouselOptions(
-                //     scrollPhysics: const BouncingScrollPhysics(),
-                //     autoPlay: true,
-                //     aspectRatio: 0.8,
-                //     viewportFraction: 1,
-                //     onPageChanged: (index, reason) {
-                //       setState(() {
-                //         currentIndex = index;
-                //       });
-                //     },
-                //   ),
-                // ),
-
                 CarouselSlider(
                   options: CarouselOptions(height: 400.0),
                   items: imagelist.map((index) {
@@ -247,15 +135,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           },
                           quote: index["quote"],
                         );
-
-                        //   Container(
-                        //     width: MediaQuery.of(context).size.width,
-                        //     margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                        //     decoration: const BoxDecoration(
-                        //         color: Colors.amber
-                        //     ),
-                        //     child: Text('text $i', style: TextStyle(fontSize: 16.0),)
-                        // );
                       },
                     );
                   }).toList(),
@@ -342,29 +221,87 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            Container(
-              child: Form(
-                key: _formKey,
-                // color: Colors.black;
-                child: Column(children: [
-                  TextFormField(
-                    decoration: InputDecoration(
-                      labelText: 'FullName *',
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Enter your Name';
-                      }
-                    },
-                  ),
-                ]),
-              ),
+            MyCustomForm(), //Adding Custom Form
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+//Creating a form widget
+class MyCustomForm extends StatefulWidget {
+  @override
+  MyCustomFormState createState() {
+    return MyCustomFormState();
+  }
+}
+
+class MyCustomFormState extends State<MyCustomForm> {
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(16.0), // Add padding to the container
+      decoration: BoxDecoration(
+        border:
+            Border.all(width: 1.0, color: Colors.grey), // Add border styling
+        borderRadius:
+            BorderRadius.all(Radius.circular(8.0)), // Add border radius
+      ),
+
+      child: Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildTextFieldWithBox(
+              hintText: 'Enter your Name',
+              labelText: 'Full Name*',
+            ),
+            _buildTextFieldWithBox(
+              hintText: 'Enter your Email',
+              labelText: 'Email*',
+            ),
+            _buildTextFieldWithBox(
+              hintText: 'Enter a phone number',
+              labelText: 'Phone*',
+            ),
+            _buildTextFieldWithBox(
+              hintText: 'Enter Your Company Name',
+              labelText: 'CompanyName*',
+            ),
+            _buildTextFieldWithBox(
+              hintText: 'Enter Your Website',
+              labelText: 'Website*',
+            ),
+            _buildTextFieldWithBox(
+              hintText: 'Enter a phone number',
+              labelText: 'Phone',
             ),
           ],
         ),
       ),
     );
   }
+}
+
+Widget _buildTextFieldWithBox({
+  String? hintText,
+  String? labelText,
+}) {
+  return Container(
+    margin: EdgeInsets.only(bottom: 16.0),
+    child: TextField(
+      decoration: InputDecoration(
+        border: OutlineInputBorder(),
+        hintText: hintText,
+        labelText: labelText,
+        contentPadding: EdgeInsets.all(16.0),
+      ),
+    ),
+  );
 }
 
 class CaroselSliderContents extends StatelessWidget {
