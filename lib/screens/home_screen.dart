@@ -267,98 +267,134 @@ class MyCustomFormState extends State<MyCustomForm> {
         border:
             Border.all(width: 1.0, color: Colors.grey), // Add border styling
         borderRadius: BorderRadius.all(Radius.circular(8.0)),
-
+        color: Colors.blueGrey.shade50,
         // Add border radius
       ),
 
-      child: Form(
-        key: _formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildTextFieldWithBox(
-                hintText: 'Enter your Name',
-                labelText: 'Full Name*',
-                controller: _nameController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please Enter your Name';
-                  }
-                  return null;
-                }),
-            _buildTextFieldWithBox(
-                hintText: 'Enter your Email',
-                labelText: 'Email*',
-                controller: _emailController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please Enter your Email';
-                  }
-                  return null;
-                }),
-            _buildTextFieldWithBox(
-                hintText: 'Enter a phone number',
-                labelText: 'Phone*',
-                controller: _phoneController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please Enter your Phone Number';
-                  }
-                  return null;
-                }),
-            _buildTextFieldWithBox(
-                hintText: 'Enter Your Company Name',
-                labelText: 'CompanyName*',
-                controller: _companyNameController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please Enter your Name';
-                  }
-                  return null;
-                }),
-            _buildTextFieldWithBox(
-                hintText: 'Enter Your Website',
-                labelText: 'Website*',
-                controller: _websiteController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please Enter your Website';
-                  }
-                  return null;
-                }),
-
-            // Add the DropdownButtonFormField
-            DropdownButtonFormField<String>(
-              value: selectedDropdownValue,
-              onChanged: (value) {
-                setState(() {
-                  selectedDropdownValue = value!;
-                });
-              },
-              items: dropdownItems.map((item) {
-                return DropdownMenuItem<String>(
-                  value: item, // Make sure each item has a unique value
-                  child: Text(item),
-                );
-              }).toList(),
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Select an option',
-                contentPadding: EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            color: Colors.red, // Set your desired background color here
+            padding: EdgeInsets.all(16.0),
+            width: double.infinity,
+            height: 70.0, // Adjust padding as needed
+            child: Text(
+              'Request a Quote',
+              style: TextStyle(
+                fontSize: 24.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.white, // You can also set the text color
               ),
             ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildTextFieldWithBox(
+                    hintText: 'Enter your Name',
+                    labelText: 'Full Name*',
+                    controller: _nameController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please Enter your Name';
+                      }
+                      return null;
+                    },
+                  ),
+                  _buildTextFieldWithBox(
+                    hintText: 'Enter your Email',
+                    labelText: 'Email*',
+                    controller: _emailController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please Enter your Email';
+                      }
+                      return null;
+                    },
+                  ),
+                  _buildTextFieldWithBox(
+                    hintText: 'Enter a phone number',
+                    labelText: 'Phone*',
+                    controller: _phoneController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please Enter your Phone Number';
+                      }
+                      return null;
+                    },
+                  ),
+                  _buildTextFieldWithBox(
+                    hintText: 'Enter Your Company Name',
+                    labelText: 'CompanyName*',
+                    controller: _companyNameController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please Enter your Company Name';
+                      }
+                      return null;
+                    },
+                  ),
+                  _buildTextFieldWithBox(
+                    hintText: 'Enter Your Website',
+                    labelText: 'Website*',
+                    controller: _websiteController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please Enter your Website';
+                      }
+                      return null;
+                    },
+                  ),
 
-            ElevatedButton(
-              onPressed: () {
-                _submitForm();
-              },
-              style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
-                  minimumSize: MaterialStateProperty.all<Size>(Size(500, 60))),
-              child: Text('Submit here', style: TextStyle(fontSize: 20)),
+                  // Add the DropdownButtonFormField
+                  DropdownButtonFormField<String>(
+                    value: selectedDropdownValue,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedDropdownValue = value!;
+                      });
+                    },
+                    items: dropdownItems.map((item) {
+                      return DropdownMenuItem<String>(
+                        value: item, // Make sure each item has a unique value
+                        child: Text(item),
+                      );
+                    }).toList(),
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(),
+                      labelText: 'Select an option',
+                      contentPadding: EdgeInsets.all(16.0),
+                    ),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        _submitForm();
+                      },
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.red),
+                        minimumSize:
+                            MaterialStateProperty.all<Size>(Size(400, 60)),
+                      ),
+                      child:
+                          Text('Submit here', style: TextStyle(fontSize: 20)),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -402,6 +438,8 @@ Widget _buildTextFieldWithBox({
         border: OutlineInputBorder(),
         hintText: hintText,
         labelText: labelText,
+        filled: true,
+        fillColor: Colors.white,
         contentPadding: EdgeInsets.all(16.0),
       ),
       validator: validator,
