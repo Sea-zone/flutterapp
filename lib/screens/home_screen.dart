@@ -239,6 +239,21 @@ class MyCustomForm extends StatefulWidget {
 
 class MyCustomFormState extends State<MyCustomForm> {
   final _formKey = GlobalKey<FormState>();
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _phoneController = TextEditingController();
+  TextEditingController _companyNameController = TextEditingController();
+  TextEditingController _websiteController = TextEditingController();
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _phoneController.dispose();
+    _companyNameController.dispose();
+    _websiteController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -247,8 +262,8 @@ class MyCustomFormState extends State<MyCustomForm> {
       decoration: BoxDecoration(
         border:
             Border.all(width: 1.0, color: Colors.grey), // Add border styling
-        borderRadius:
-            BorderRadius.all(Radius.circular(8.0)), // Add border radius
+        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+        // Add border radius
       ),
 
       child: Form(
@@ -257,49 +272,116 @@ class MyCustomFormState extends State<MyCustomForm> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildTextFieldWithBox(
-              hintText: 'Enter your Name',
-              labelText: 'Full Name*',
-            ),
+                hintText: 'Enter your Name',
+                labelText: 'Full Name*',
+                controller: _nameController,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please Enter your Name';
+                  }
+                  return null;
+                }),
             _buildTextFieldWithBox(
-              hintText: 'Enter your Email',
-              labelText: 'Email*',
-            ),
+                hintText: 'Enter your Email',
+                labelText: 'Email*',
+                controller: _nameController,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please Enter your Email';
+                  }
+                  return null;
+                }),
             _buildTextFieldWithBox(
-              hintText: 'Enter a phone number',
-              labelText: 'Phone*',
-            ),
+                hintText: 'Enter a phone number',
+                labelText: 'Phone*',
+                controller: _phoneController,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please Enter your Phone Number';
+                  }
+                  return null;
+                }),
             _buildTextFieldWithBox(
-              hintText: 'Enter Your Company Name',
-              labelText: 'CompanyName*',
-            ),
+                hintText: 'Enter Your Company Name',
+                labelText: 'CompanyName*',
+                controller: _companyNameController,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please Enter your Name';
+                  }
+                  return null;
+                }),
             _buildTextFieldWithBox(
-              hintText: 'Enter Your Website',
-              labelText: 'Website*',
-            ),
-            _buildTextFieldWithBox(
-              hintText: 'Enter a phone number',
-              labelText: 'Phone',
+                hintText: 'Enter Your Website',
+                labelText: 'Website*',
+                controller: _websiteController,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please Enter your Name';
+                  }
+                  return null;
+                }),
+            // _buildTextFieldWithBox(
+            //   hintText: 'Enter a phone number',
+            //   labelText: 'Phone',
+            // ),
+            ElevatedButton(
+              onPressed: () {
+                _submitForm();
+              },
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+                  minimumSize: MaterialStateProperty.all<Size>(Size(500, 60))),
+              child: Text('Submit here', style: TextStyle(fontSize: 20)),
             ),
           ],
         ),
       ),
     );
   }
+
+  void _submitForm() {
+    if (_formKey.currentState!.validate()) {
+      // All form fields are valid, you can submit the data
+      // Access the form field values using the controller
+      String name = _nameController.text;
+      String email = _emailController.text;
+      String phone = _phoneController.text;
+      String companyName = _companyNameController.text;
+      String website = _websiteController.text;
+
+      // You can handle the form submission here, e.g., send data to a server
+      // or perform any required actions
+      print('Name: $name');
+      print('Email: $email');
+      print('Phone: $phone');
+      print('Company Name: $companyName');
+      print('Website: $website');
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Form submitted successfully')),
+      );
+    }
+  }
 }
 
 Widget _buildTextFieldWithBox({
   String? hintText,
   String? labelText,
+  TextEditingController? controller,
+  String? Function(String?)? validator,
 }) {
   return Container(
     margin: EdgeInsets.only(bottom: 16.0),
-    child: TextField(
+    child: TextFormField(
+      controller: controller,
       decoration: InputDecoration(
         border: OutlineInputBorder(),
         hintText: hintText,
         labelText: labelText,
         contentPadding: EdgeInsets.all(16.0),
       ),
+      validator: validator,
     ),
   );
 }
