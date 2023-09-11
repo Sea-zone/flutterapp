@@ -278,6 +278,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             color: Colors.red, // Set your desired background color here
             padding: EdgeInsets.all(16.0),
             width: double.infinity,
+            alignment: Alignment.center,
             height: 70.0, // Adjust padding as needed
             child: Text(
               'Request a Quote',
