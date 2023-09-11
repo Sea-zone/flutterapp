@@ -255,6 +255,10 @@ class MyCustomFormState extends State<MyCustomForm> {
     super.dispose();
   }
 
+  List<String> dropdownItems = ["Premium", "Standard", "Basic"];
+
+  String selectedDropdownValue = 'Premium';
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -263,6 +267,7 @@ class MyCustomFormState extends State<MyCustomForm> {
         border:
             Border.all(width: 1.0, color: Colors.grey), // Add border styling
         borderRadius: BorderRadius.all(Radius.circular(8.0)),
+
         // Add border radius
       ),
 
@@ -284,7 +289,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             _buildTextFieldWithBox(
                 hintText: 'Enter your Email',
                 labelText: 'Email*',
-                controller: _nameController,
+                controller: _emailController,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please Enter your Email';
@@ -317,14 +322,32 @@ class MyCustomFormState extends State<MyCustomForm> {
                 controller: _websiteController,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please Enter your Name';
+                    return 'Please Enter your Website';
                   }
                   return null;
                 }),
-            // _buildTextFieldWithBox(
-            //   hintText: 'Enter a phone number',
-            //   labelText: 'Phone',
-            // ),
+
+            // Add the DropdownButtonFormField
+            DropdownButtonFormField<String>(
+              value: selectedDropdownValue,
+              onChanged: (value) {
+                setState(() {
+                  selectedDropdownValue = value!;
+                });
+              },
+              items: dropdownItems.map((item) {
+                return DropdownMenuItem<String>(
+                  value: item, // Make sure each item has a unique value
+                  child: Text(item),
+                );
+              }).toList(),
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Select an option',
+                contentPadding: EdgeInsets.all(16.0),
+              ),
+            ),
+
             ElevatedButton(
               onPressed: () {
                 _submitForm();
