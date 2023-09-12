@@ -222,10 +222,91 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             MyCustomForm(), //Adding Custom Form
+            SizedBox(
+                height:
+                    15.0), // Adding space between the form and the container
+            Container(
+              padding: EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  width: 1.0,
+                  color: Colors.grey,
+                ),
+                borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                color: Colors.blueGrey.shade50,
+              ),
+              child: Column(
+                crossAxisAlignment:
+                    CrossAxisAlignment.center, // Center children horizontally
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment
+                        .center, // Center children horizontally
+                    children: [
+                      Container(
+                        height: 30.0,
+                        width: 10,
+                        color: Colors.red,
+                      ),
+                      SizedBox(
+                          width: 10), // Add space between container and text
+                      Text(
+                        'What We Do ?',
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10), // Add space between lines
+                  Text(
+                    'we prioritize customer satisfaction, timely delivery, and exceeding expectations',
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                  Card(
+                    elevation: 3, // Add elevation for a shadow effect
+                    child: ListTile(
+                      title: Text('Card 1'),
+                      subtitle: Text('Card 1 subtitle'),
+                    ),
+                  ),
+                  Card(
+                    elevation: 3, // Add elevation for a shadow effect
+                    child: ListTile(
+                      title: Text('Card 1'),
+                      subtitle: Text('Card 1 subtitle'),
+                    ),
+                  ),
+                  Card(
+                    elevation: 3, // Add elevation for a shadow effect
+                    child: ListTile(
+                      title: Text('Card 1'),
+                      subtitle: Text('Card 1 subtitle'),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
     );
+  }
+}
+
+// Creating a Card
+class OutlinedCard extends StatelessWidget {
+  const OutlinedCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }
 
