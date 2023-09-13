@@ -2,6 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'carosel_slider_content.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -35,6 +37,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       "bottonText": "request Quote"
     },
   ];
+
   @override
   void initState() {
     super.initState();
@@ -236,18 +239,20 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 ),
               ),
             ),
-            MyCustomForm(), //Adding Custom Form
-            SizedBox(
+            const MyCustomForm(), //Adding Custom Form
+            const SizedBox(
                 height:
                     15.0), // Adding space between the form and the container
             Container(
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               decoration: BoxDecoration(
                 border: Border.all(
                   width: 1.0,
                   color: Colors.grey,
                 ),
-                borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(8.0),
+                ),
                 color: Colors.blueGrey.shade50,
               ),
               child: Column(
@@ -263,9 +268,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         width: 10,
                         color: Colors.red,
                       ),
-                      SizedBox(
+                      const SizedBox(
                           width: 10), // Add space between container and text
-                      Text(
+                      const Text(
                         'What We Do ?',
                         style: TextStyle(
                           fontSize: 18.0,
@@ -275,8 +280,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       ),
                     ],
                   ),
-                  SizedBox(height: 10), // Add space between lines
-                  Text(
+                  const SizedBox(height: 10), // Add space between lines
+                  const Text(
                     'we prioritize customer satisfaction, timely delivery, and exceeding expectations',
                     style: TextStyle(
                       fontSize: 18.0,
@@ -284,14 +289,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       color: Colors.black,
                     ),
                   ),
-                  Container(
+                  const SizedBox(
                     width: double.infinity,
                     height: 300,
                     child: Card(
                       margin: EdgeInsets.all(25),
                       color: Colors.white,
                       child: Padding(
-                        padding: const EdgeInsets.all(18.0),
+                        padding: EdgeInsets.all(18.0),
                         child: Text(
                           'Search Engine Optimization',
                           style: TextStyle(fontSize: 18.0),
@@ -324,13 +329,34 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             ),
 
             TabBar(
+              indicatorColor: Colors.blue,
+              labelColor: Colors.red,
               controller: _tabController,
-              tabs: [Tab(text: "Food"), Tab(text: "Momo"), Tab(text: "Pizza")],
+              tabs: const [
+                Tab(text: "Project"),
+                Tab(text: "Momo"),
+                Tab(text: "Pizza")
+              ],
             ),
 
-            TabBarView(
-                controller: _tabController,
-                children: [Text("Hi"), Text("there"), Text("here")]),
+            SizedBox(
+              height: 600.0,
+              child: TabBarView(controller: _tabController, children: const [
+                Column(
+                  children: [
+                    Text('data'),
+                    Text('data'),
+                    Text('data'),
+                    Text('data'),
+                    Text('data'),
+                    Text('data'),
+                    Text('data'),
+                  ],
+                ),
+                Text("there"),
+                Text("here"),
+              ]),
+            ),
 
             const SizedBox(
               height: 30,
@@ -354,6 +380,8 @@ class OutlinedCard extends StatelessWidget {
 
 //Creating a form widget
 class MyCustomForm extends StatefulWidget {
+  const MyCustomForm({super.key});
+
   @override
   MyCustomFormState createState() {
     return MyCustomFormState();
@@ -362,11 +390,11 @@ class MyCustomForm extends StatefulWidget {
 
 class MyCustomFormState extends State<MyCustomForm> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _phoneController = TextEditingController();
-  TextEditingController _companyNameController = TextEditingController();
-  TextEditingController _websiteController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _companyNameController = TextEditingController();
+  final TextEditingController _websiteController = TextEditingController();
 
   @override
   void dispose() {
@@ -385,11 +413,11 @@ class MyCustomFormState extends State<MyCustomForm> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16.0), // Add padding to the container
+      padding: const EdgeInsets.all(16.0), // Add padding to the container
       decoration: BoxDecoration(
         border:
             Border.all(width: 1.0, color: Colors.grey), // Add border styling
-        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+        borderRadius: const BorderRadius.all(Radius.circular(8.0)),
         color: Colors.blueGrey.shade50,
         // Add border radius
       ),
@@ -398,12 +426,14 @@ class MyCustomFormState extends State<MyCustomForm> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            color: Colors.red, // Set your desired background color here
-            padding: EdgeInsets.all(16.0),
+            color: Colors.red,
+            // Set your desired background color here
+            padding: const EdgeInsets.all(16.0),
             width: double.infinity,
             alignment: Alignment.center,
-            height: 70.0, // Adjust padding as needed
-            child: Text(
+            height: 70.0,
+            // Adjust padding as needed
+            child: const Text(
               'Request a Quote',
               style: TextStyle(
                 fontSize: 24.0,
@@ -489,7 +519,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                         child: Text(item),
                       );
                     }).toList(),
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
                       border: OutlineInputBorder(),
@@ -569,66 +599,4 @@ Widget _buildTextFieldWithBox({
       validator: validator,
     ),
   );
-}
-
-class CaroselSliderContents extends StatelessWidget {
-  const CaroselSliderContents({
-    required this.buttonText,
-    required this.description,
-    required this.imagePath,
-    required this.onClick,
-    required this.quote,
-    super.key,
-  });
-
-  final String imagePath;
-  final String quote;
-  final String buttonText;
-  final String description;
-  final Function() onClick;
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Image(
-          width: double.infinity,
-          height: 400.0,
-          fit: BoxFit.cover,
-          image: AssetImage(
-            imagePath,
-          ),
-        ),
-        Positioned(
-            child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                quote,
-                style: const TextStyle(
-                  color: Colors.yellow,
-                ),
-              ),
-              const SizedBox(
-                height: 30.0,
-              ),
-              Text(
-                description,
-                style: const TextStyle(
-                  color: Colors.yellow,
-                ),
-              ),
-              ElevatedButton(
-                  onPressed: onClick,
-                  child: Text(
-                    buttonText,
-                    style: const TextStyle(color: Colors.black),
-                  ))
-            ],
-          ),
-        ))
-      ],
-    );
-  }
 }
