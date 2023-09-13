@@ -9,7 +9,8 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
+  TabController? _tabController; // Define _tabController as nullable
   List imagelist = [
     {
       "quote": "Reach your goal\n faster",
@@ -17,23 +18,37 @@ class _HomeScreenState extends State<HomeScreen> {
           "Forge connections, engage deeply,and brands\n digital marketing services",
       "id": 1,
       "image_path": 'images/1.png',
-      "bottonText": "request Quote1"
+      "bottonText": "request Quote"
     },
     {
       "quote": "Connect, Engage ,\n succeed",
       "description": "this is description 2",
       "id": 2,
       "image_path": 'images/2.png',
-      "bottonText": "request Quote2"
+      "bottonText": "request Quote"
     },
     {
       "quote": "Elevate Customer \n Experience",
       "description": "this is description 3",
       "id": 3,
       "image_path": 'images/3.png',
-      "bottonText": "request Quote3"
+      "bottonText": "request Quote"
     },
   ];
+  @override
+  void initState() {
+    super.initState();
+
+    // Initialize _tabController with the correct length and vsync
+    _tabController = TabController(length: 3, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    // Dispose of _tabController if it's not null
+    _tabController?.dispose();
+    super.dispose();
+  }
 
   final CarouselController carouselController = CarouselController();
   int currentIndex = 0;
@@ -119,30 +134,6 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Stack(
               children: [
-                // CarouselSlider(
-                //   items: imagelist
-                //       .map(
-                //         (item) => Image.asset(
-                //           item['image_path'],
-                //           fit: BoxFit.cover,
-                //           width: 500,
-                //         ),
-                //       )
-                //       .toList(),
-                //   carouselController: carouselController,
-                //   options: CarouselOptions(
-                //     scrollPhysics: const BouncingScrollPhysics(),
-                //     autoPlay: true,
-                //     aspectRatio: 0.8,
-                //     viewportFraction: 1,
-                //     onPageChanged: (index, reason) {
-                //       setState(() {
-                //         currentIndex = index;
-                //       });
-                //     },
-                //   ),
-                // ),
-
                 CarouselSlider(
                   options: CarouselOptions(height: 400.0),
                   items: imagelist.map((index) {
@@ -159,15 +150,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           },
                           quote: index["quote"],
                         );
-
-                        //   Container(
-                        //     width: MediaQuery.of(context).size.width,
-                        //     margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                        //     decoration: const BoxDecoration(
-                        //         color: Colors.amber
-                        //     ),
-                        //     child: Text('text $i', style: TextStyle(fontSize: 16.0),)
-                        // );
                       },
                     );
                   }).toList(),
@@ -254,11 +236,339 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
+            MyCustomForm(), //Adding Custom Form
+            SizedBox(
+                height:
+                    15.0), // Adding space between the form and the container
+            Container(
+              padding: EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  width: 1.0,
+                  color: Colors.grey,
+                ),
+                borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                color: Colors.blueGrey.shade50,
+              ),
+              child: Column(
+                crossAxisAlignment:
+                    CrossAxisAlignment.center, // Center children horizontally
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment
+                        .center, // Center children horizontally
+                    children: [
+                      Container(
+                        height: 30.0,
+                        width: 10,
+                        color: Colors.red,
+                      ),
+                      SizedBox(
+                          width: 10), // Add space between container and text
+                      Text(
+                        'What We Do ?',
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10), // Add space between lines
+                  Text(
+                    'we prioritize customer satisfaction, timely delivery, and exceeding expectations',
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    height: 300,
+                    child: Card(
+                      margin: EdgeInsets.all(25),
+                      color: Colors.white,
+                      child: Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: Text(
+                          'Search Engine Optimization',
+                          style: TextStyle(fontSize: 18.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Card(
+                    elevation: 3, // Add elevation for a shadow effect
+                    child: ListTile(
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                            color: Theme.of(context).colorScheme.outline,
+                          ),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(12)),
+                        ),
+                        title: const SizedBox(
+                          width: 300,
+                          height: 100,
+                          child:
+                              Center(child: Text('Search Engine Optimiation')),
+                        )),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+
+            TabBar(
+              controller: _tabController,
+              tabs: [Tab(text: "Food"), Tab(text: "Momo"), Tab(text: "Pizza")],
+            ),
+
+            TabBarView(
+                controller: _tabController,
+                children: [Text("Hi"), Text("there"), Text("here")]),
+
+            const SizedBox(
+              height: 30,
+            ),
           ],
         ),
       ),
     );
   }
+}
+
+// Creating a Card
+class OutlinedCard extends StatelessWidget {
+  const OutlinedCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
+//Creating a form widget
+class MyCustomForm extends StatefulWidget {
+  @override
+  MyCustomFormState createState() {
+    return MyCustomFormState();
+  }
+}
+
+class MyCustomFormState extends State<MyCustomForm> {
+  final _formKey = GlobalKey<FormState>();
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _phoneController = TextEditingController();
+  TextEditingController _companyNameController = TextEditingController();
+  TextEditingController _websiteController = TextEditingController();
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _phoneController.dispose();
+    _companyNameController.dispose();
+    _websiteController.dispose();
+    super.dispose();
+  }
+
+  List<String> dropdownItems = ["Premium", "Standard", "Basic"];
+
+  String selectedDropdownValue = 'Premium';
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(16.0), // Add padding to the container
+      decoration: BoxDecoration(
+        border:
+            Border.all(width: 1.0, color: Colors.grey), // Add border styling
+        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+        color: Colors.blueGrey.shade50,
+        // Add border radius
+      ),
+
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            color: Colors.red, // Set your desired background color here
+            padding: EdgeInsets.all(16.0),
+            width: double.infinity,
+            alignment: Alignment.center,
+            height: 70.0, // Adjust padding as needed
+            child: Text(
+              'Request a Quote',
+              style: TextStyle(
+                fontSize: 24.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.white, // You can also set the text color
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildTextFieldWithBox(
+                    hintText: 'Enter your Name',
+                    labelText: 'Full Name*',
+                    controller: _nameController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please Enter your Name';
+                      }
+                      return null;
+                    },
+                  ),
+                  _buildTextFieldWithBox(
+                    hintText: 'Enter your Email',
+                    labelText: 'Email*',
+                    controller: _emailController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please Enter your Email';
+                      }
+                      return null;
+                    },
+                  ),
+                  _buildTextFieldWithBox(
+                    hintText: 'Enter a phone number',
+                    labelText: 'Phone*',
+                    controller: _phoneController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please Enter your Phone Number';
+                      }
+                      return null;
+                    },
+                  ),
+                  _buildTextFieldWithBox(
+                    hintText: 'Enter Your Company Name',
+                    labelText: 'CompanyName*',
+                    controller: _companyNameController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please Enter your Company Name';
+                      }
+                      return null;
+                    },
+                  ),
+                  _buildTextFieldWithBox(
+                    hintText: 'Enter Your Website',
+                    labelText: 'Website*',
+                    controller: _websiteController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please Enter your Website';
+                      }
+                      return null;
+                    },
+                  ),
+
+                  // Add the DropdownButtonFormField
+                  DropdownButtonFormField<String>(
+                    value: selectedDropdownValue,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedDropdownValue = value!;
+                      });
+                    },
+                    items: dropdownItems.map((item) {
+                      return DropdownMenuItem<String>(
+                        value: item, // Make sure each item has a unique value
+                        child: Text(item),
+                      );
+                    }).toList(),
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(),
+                      labelText: 'Select an option',
+                      contentPadding: EdgeInsets.all(16.0),
+                    ),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        _submitForm();
+                      },
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.red),
+                        minimumSize:
+                            MaterialStateProperty.all<Size>(Size(400, 60)),
+                      ),
+                      child:
+                          Text('Submit here', style: TextStyle(fontSize: 20)),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _submitForm() {
+    if (_formKey.currentState!.validate()) {
+      // All form fields are valid, you can submit the data
+      // Access the form field values using the controller
+      String name = _nameController.text;
+      String email = _emailController.text;
+      String phone = _phoneController.text;
+      String companyName = _companyNameController.text;
+      String website = _websiteController.text;
+
+      // You can handle the form submission here, e.g., send data to a server
+      // or perform any required actions
+      print('Name: $name');
+      print('Email: $email');
+      print('Phone: $phone');
+      print('Company Name: $companyName');
+      print('Website: $website');
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Form submitted successfully')),
+      );
+    }
+  }
+}
+
+Widget _buildTextFieldWithBox({
+  String? hintText,
+  String? labelText,
+  TextEditingController? controller,
+  String? Function(String?)? validator,
+}) {
+  return Container(
+    margin: EdgeInsets.only(bottom: 16.0),
+    child: TextFormField(
+      controller: controller,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(),
+        hintText: hintText,
+        labelText: labelText,
+        filled: true,
+        fillColor: Colors.white,
+        contentPadding: EdgeInsets.all(16.0),
+      ),
+      validator: validator,
+    ),
+  );
 }
 
 class CaroselSliderContents extends StatelessWidget {
