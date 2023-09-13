@@ -34,13 +34,13 @@ class _HomeScreenState extends State<HomeScreen> {
       "bottonText": "request Quote"
     },
   ];
+  TabController _tabController = TabController(length: 3, vsync: this);
 
   final CarouselController carouselController = CarouselController();
   int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    TabController _tabController = TabController(length: 3, vsync: this);
     return Scaffold(
       endDrawer: Drawer(
         child: Padding(
