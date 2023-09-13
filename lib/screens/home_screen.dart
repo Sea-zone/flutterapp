@@ -9,7 +9,8 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
+  TabController? _tabController; // Define _tabController as nullable
   List imagelist = [
     {
       "quote": "Reach your goal\n faster",
@@ -34,7 +35,20 @@ class _HomeScreenState extends State<HomeScreen> {
       "bottonText": "request Quote"
     },
   ];
-  TabController _tabController = TabController(length: 3, vsync: this);
+  @override
+  void initState() {
+    super.initState();
+
+    // Initialize _tabController with the correct length and vsync
+    _tabController = TabController(length: 3, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    // Dispose of _tabController if it's not null
+    _tabController?.dispose();
+    super.dispose();
+  }
 
   final CarouselController carouselController = CarouselController();
   int currentIndex = 0;
@@ -308,21 +322,16 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(
               height: 30,
             ),
-            Container(
-              child: TabBar(
+
+            TabBar(
+              controller: _tabController,
+              tabs: [Tab(text: "Food"), Tab(text: "Momo"), Tab(text: "Pizza")],
+            ),
+
+            TabBarView(
                 controller: _tabController,
-                tabs: [
-                  Tab(text: "Food"),
-                  Tab(text: "Momo"),
-                  Tab(text: "Pizza")
-                ],
-              ),
-            ),
-            Container(
-              child: TabBarView(
-                  controller: _tabController,
-                  children: [Text("Hi"), Text("there"), Text("here")]),
-            ),
+                children: [Text("Hi"), Text("there"), Text("here")]),
+
             const SizedBox(
               height: 30,
             ),
