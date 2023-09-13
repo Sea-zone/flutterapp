@@ -40,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    TabController _tabController = TabController(length: 3, vsync: this);
     return Scaffold(
       endDrawer: Drawer(
         child: Padding(
@@ -269,29 +270,61 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Colors.black,
                     ),
                   ),
-                  Card(
-                    elevation: 3, // Add elevation for a shadow effect
-                    child: ListTile(
-                      title: Text('Card 1'),
-                      subtitle: Text('Card 1 subtitle'),
+                  Container(
+                    width: double.infinity,
+                    height: 300,
+                    child: Card(
+                      margin: EdgeInsets.all(25),
+                      color: Colors.white,
+                      child: Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: Text(
+                          'Search Engine Optimization',
+                          style: TextStyle(fontSize: 18.0),
+                        ),
+                      ),
                     ),
                   ),
                   Card(
                     elevation: 3, // Add elevation for a shadow effect
                     child: ListTile(
-                      title: Text('Card 1'),
-                      subtitle: Text('Card 1 subtitle'),
-                    ),
-                  ),
-                  Card(
-                    elevation: 3, // Add elevation for a shadow effect
-                    child: ListTile(
-                      title: Text('Card 1'),
-                      subtitle: Text('Card 1 subtitle'),
-                    ),
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                            color: Theme.of(context).colorScheme.outline,
+                          ),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(12)),
+                        ),
+                        title: const SizedBox(
+                          width: 300,
+                          height: 100,
+                          child:
+                              Center(child: Text('Search Engine Optimiation')),
+                        )),
                   ),
                 ],
               ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Container(
+              child: TabBar(
+                controller: _tabController,
+                tabs: [
+                  Tab(text: "Food"),
+                  Tab(text: "Momo"),
+                  Tab(text: "Pizza")
+                ],
+              ),
+            ),
+            Container(
+              child: TabBarView(
+                  controller: _tabController,
+                  children: [Text("Hi"), Text("there"), Text("here")]),
+            ),
+            const SizedBox(
+              height: 30,
             ),
           ],
         ),
